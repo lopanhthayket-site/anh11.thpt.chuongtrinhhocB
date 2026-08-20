@@ -216,6 +216,19 @@ const lessons = [
 
 const container = document.getElementById("lesson-list");
 
+// Xếp bài học theo ngày: mới nhất → cũ nhất
+lessons.sort((a, b) => {
+    const getDate = (time) => {
+        const match = time.match(/(\d{2})\/(\d{2})/);
+        if (!match) return new Date(0);
+
+        const [, day, month] = match;
+        return new Date(2026, Number(month) - 1, Number(day));
+    };
+
+    return getDate(b.time) - getDate(a.time);
+});
+
 lessons.forEach(item => {
 
 container.innerHTML += `
